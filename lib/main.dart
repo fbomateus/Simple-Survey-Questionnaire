@@ -50,7 +50,12 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
                   ...answers!.map((a) => Answer(a, _answer)).toList(),
                 ],
               )
-            : null,
+            : Center(
+                child: Text(
+                  'Congratulations!',
+                  style: TextStyle(fontSize: 28),
+                ),
+              ),
       ),
     );
   }
