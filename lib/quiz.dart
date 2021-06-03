@@ -5,7 +5,7 @@ import './answer.dart';
 class Quiz extends StatelessWidget {
   final List<Map> questions;
   final int selectedQuestion;
-  final void Function() onAnswer;
+  final void Function(int) onAnswer;
 
   Quiz({
     required this.questions,
@@ -19,13 +19,18 @@ class Quiz extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String>? answers =
+    List<Map>? answers =
         haveQuestionSelected ? questions[selectedQuestion]['answer'] : null;
 
     return Column(
       children: [
         Question(questions[selectedQuestion]['question']),
-        ...answers!.map((a) => Answer(a, onAnswer)).toList(),
+        ...answers!.map((res) {
+          return Answer(
+            res['answer'],
+            () => onAnswer(res['score']),
+          );
+        }).toList(),
       ],
     );
   }

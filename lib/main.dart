@@ -6,25 +6,42 @@ main() => runApp(SurveyQuetionnaireApp());
 
 class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
   var _selectedQuestion = 0;
+  var _totalScore = 0;
   final List<Map> _questions = const [
     {
       'question': "What's your favourite colour?",
-      'answer': ['Black', 'Red', 'Green', 'White'],
+      'answer': [
+        {'answer': 'Black', 'score': 10},
+        {'answer': 'Red', 'score': 5},
+        {'answer': 'Green', 'score': 3},
+        {'answer': 'White', 'score': 1},
+      ],
     },
     {
       'question': "What's your favourite animal?",
-      'answer': ['Rabbit', 'Snake', 'Elephant', 'Leon'],
+      'answer': [
+        {'answer': 'Rabbit', 'score': 10},
+        {'answer': 'Snake', 'score': 5},
+        {'answer': 'Elephant', 'score': 3},
+        {'answer': 'Leon', 'score': 1},
+      ],
     },
     {
       'question': "What's your favourite game?",
-      'answer': ['Counter-Strike', 'Minecraft', 'Call of Duty', 'PUBG'],
+      'answer': [
+        {'answer': 'Counter-Strike', 'score': 10},
+        {'answer': 'Minecraft', 'score': 5},
+        {'answer': 'Call of Duty', 'score': 3},
+        {'answer': 'PUBG', 'score': 1},
+      ],
     }
   ];
 
-  void _answer() {
+  void _answer(int score) {
     if (haveQuestionSelected) {
       setState(() {
         _selectedQuestion++;
+        _totalScore += score;
       });
     }
   }
@@ -46,7 +63,7 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
                 selectedQuestion: _selectedQuestion,
                 onAnswer: _answer,
               )
-            : Result(),
+            : Result(_totalScore),
       ),
     );
   }
