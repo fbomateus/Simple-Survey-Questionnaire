@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './question.dart';
 import './answer.dart';
+import './result.dart';
 
 main() => runApp(SurveyQuetionnaireApp());
 
@@ -50,12 +51,7 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
                   ...answers!.map((a) => Answer(a, _answer)).toList(),
                 ],
               )
-            : Center(
-                child: Text(
-                  'Congratulations!',
-                  style: TextStyle(fontSize: 28),
-                ),
-              ),
+            : Result(),
       ),
     );
   }
