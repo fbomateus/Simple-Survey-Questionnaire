@@ -1,4 +1,4 @@
-# simple_survey_questionnaire
+# simple_quiz
 
 Simple quiz project.
 
