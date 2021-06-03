@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 main() => runApp(SurveyQuetionnaireApp());
 
@@ -10,7 +11,6 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
     setState(() {
       _selectedQuestion++;
     });
-    print(_selectedQuestion);
   }
 
   @override
@@ -28,9 +28,9 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
         body: Column(
           children: [
             Question(questions[_selectedQuestion]),
-            ElevatedButton(onPressed: _answer, child: Text('Answer 01')),
-            ElevatedButton(onPressed: _answer, child: Text('Answer 02')),
-            ElevatedButton(onPressed: _answer, child: Text('Answer 03')),
+            Answer('Answer 01', _answer),
+            Answer('Answer 02', _answer),
+            Answer('Answer 03', _answer),
           ],
         ),
       ),
