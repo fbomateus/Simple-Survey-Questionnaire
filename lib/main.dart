@@ -6,43 +6,51 @@ main() => runApp(SurveyQuetionnaireApp());
 
 class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
   var _selectedQuestion = 0;
+  final List<Map> _questions = const [
+    {
+      'question': "What's your favourite colour?",
+      'answer': ['Black', 'Red', 'Green', 'White'],
+    },
+    {
+      'question': "What's your favourite animal?",
+      'answer': ['Rabbit', 'Snake', 'Elephant', 'Leon'],
+    },
+    {
+      'question': "What's your favourite game?",
+      'answer': ['Counter-Strike', 'Minecraft', 'Call of Duty', 'PUBG'],
+    }
+  ];
 
   void _answer() {
-    setState(() {
-      _selectedQuestion++;
-    });
+    if (haveQuestionSelected) {
+      setState(() {
+        _selectedQuestion++;
+      });
+    }
+  }
+
+  bool get haveQuestionSelected {
+    return _selectedQuestion < _questions.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<Map> questions = [
-      {
-        'question': "What's your favourite colour?",
-        'answer': ['Black', 'Red', 'Green', 'White'],
-      },
-      {
-        'question': "What's your favourite animal?",
-        'answer': ['Rabbit', 'Snake', 'Elephant', 'Leon'],
-      },
-      {
-        'question': "What's your favourite game?",
-        'answer': ['Counter-Strike', 'Minecraft', 'Call of Duty', 'PUBG'],
-      }
-    ];
-
-    List<String> answers = questions[_selectedQuestion]['answer'];
+    List<String>? answers =
+        haveQuestionSelected ? _questions[_selectedQuestion]['answer'] : null;
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Questions'),
         ),
-        body: Column(
-          children: [
-            Question(questions[_selectedQuestion]['question']),
-            ...answers.map((a) => Answer(a, _answer)).toList(),
-          ],
-        ),
+        body: haveQuestionSelected
+            ? Column(
+                children: [
+                  Question(_questions[_selectedQuestion]['question']),
+                  ...answers!.map((a) => Answer(a, _answer)).toList(),
+                ],
+              )
+            : null,
       ),
     );
   }
