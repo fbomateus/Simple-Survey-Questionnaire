@@ -15,10 +15,22 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
 
   @override
   Widget build(BuildContext context) {
-    final questions = [
-      "What's your favourite colour?",
-      "What's your favourite animal?",
+    final List<Map> questions = [
+      {
+        'question': "What's your favourite colour?",
+        'answer': ['Black', 'Red', 'Green', 'White'],
+      },
+      {
+        'question': "What's your favourite animal?",
+        'answer': ['Rabbit', 'Snake', 'Elephant', 'Leon'],
+      },
+      {
+        'question': "What's your favourite game?",
+        'answer': ['Counter-Strike', 'Minecraft', 'Call of Duty', 'PUBG'],
+      }
     ];
+
+    List<String> answers = questions[_selectedQuestion]['answer'];
 
     return MaterialApp(
       home: Scaffold(
@@ -27,10 +39,8 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
         ),
         body: Column(
           children: [
-            Question(questions[_selectedQuestion]),
-            Answer('Answer 01', _answer),
-            Answer('Answer 02', _answer),
-            Answer('Answer 03', _answer),
+            Question(questions[_selectedQuestion]['question']),
+            ...answers.map((a) => Answer(a, _answer)).toList(),
           ],
         ),
       ),
