@@ -46,6 +46,13 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
     }
   }
 
+  void _restartQuiz() {
+    setState(() {
+      _selectedQuestion = 0;
+      _totalScore = 0;
+    });
+  }
+
   bool get haveQuestionSelected {
     return _selectedQuestion < _questions.length;
   }
@@ -63,7 +70,7 @@ class _SurveyQuetionnaireAppState extends State<SurveyQuetionnaireApp> {
                 selectedQuestion: _selectedQuestion,
                 onAnswer: _answer,
               )
-            : Result(_totalScore),
+            : Result(_totalScore, _restartQuiz),
       ),
     );
   }
